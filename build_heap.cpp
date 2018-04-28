@@ -1,6 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+<<<<<<< HEAD
+=======
+#include <math.h>
+>>>>>>> 2de3fcfd285eedd3fcb572031a64f2e788ab3082
 
 using std::vector;
 using std::cin;
@@ -13,6 +17,10 @@ class HeapBuilder {
  private:
   vector<int> data_;
   vector< pair<int, int> > swaps_;
+<<<<<<< HEAD
+=======
+  int minIndex_ ;
+>>>>>>> 2de3fcfd285eedd3fcb572031a64f2e788ab3082
 
   void WriteResponse() const {
     cout << swaps_.size() << "\n";
@@ -29,6 +37,7 @@ class HeapBuilder {
       cin >> data_[i];
   }
 
+<<<<<<< HEAD
   void GenerateSwaps() {
     swaps_.clear();
     // The following naive implementation just sorts 
@@ -45,6 +54,31 @@ class HeapBuilder {
           swaps_.push_back(make_pair(i, j));
         }
       }
+=======
+  void SiftDown(){
+    int currMinIndex = minIndex_ ;
+    int l = 2*currMinIndex + 1;
+    if( l <= (data_.size() - 1) && data_[l] < data_[minIndex_])
+      minIndex_ = l;
+    int r = 2*currMinIndex + 2;
+    if( r <= (data_.size() - 1) && data_[r] < data_[minIndex_])
+      minIndex_ = r;
+    //std::cout << "l: " << l << " r:" << r << " currIndex: "  << currMinIndex << " minIndex: " << minIndex_ << std::endl;
+    if (currMinIndex != minIndex_){
+      swap(data_[currMinIndex], data_[minIndex_]);
+      swaps_.push_back(make_pair(currMinIndex, minIndex_));
+      SiftDown();
+    }
+  }
+
+  void GenerateSwaps() {
+    swaps_.clear();
+    for (int i = data_.size(); i >=0; --i){
+      minIndex_ = i;
+      //std::cout << minIndex_ << std::endl;
+      SiftDown();
+    }
+>>>>>>> 2de3fcfd285eedd3fcb572031a64f2e788ab3082
   }
 
  public:
